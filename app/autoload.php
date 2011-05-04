@@ -8,6 +8,7 @@ $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'	=> __DIR__.'/../vendor/',
     'Scanner'	=> __DIR__.'/../src/',
+	'Zend'		=> __DIR__.'/../vendor/zend/library/',
     'Test'		=> __DIR__.'/../tests/',
 ));
 $loader->register();

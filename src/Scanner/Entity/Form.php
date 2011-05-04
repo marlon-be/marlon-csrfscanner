@@ -5,10 +5,10 @@ class Form
 {
 	/** @var Page */
 	private $page;
-
 	private $name;
+	private $form;
 
-	public function __construct(Page $page, $name)
+	public function __construct(Page $page, $name, $form)
 	{
 		$this->page = $page;
 		$this->name = $name;

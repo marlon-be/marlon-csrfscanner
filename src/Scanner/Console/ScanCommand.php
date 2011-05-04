@@ -30,6 +30,6 @@ class ScanCommand extends Command
 		$profile = new Profile;
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
 
-
+		$output->writeln('<info>Done.</info>');
 	}
 }

@@ -16,3 +16,6 @@
 [submodule "vendor/Symfony/Component/BrowserKit"]
 	path = vendor/Symfony/Component/BrowserKit
 	url = https://github.com/symfony/BrowserKit.git
+[submodule "vendor/zend"]
+	path = vendor/zend
+	url = https://github.com/zendframework/zf2.git
