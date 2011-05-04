@@ -1,36 +1,38 @@
 <?php
 namespace Scanner\Entity;
 
-use Scanner\Collection\FormCollection;
+use Scanner\Collection\FormsCollection;
+
+use Symfony\Component\DomCrawler\Crawler;
 
 class Page
 {
+	/** @var Crawler */
+	private $crawler;
 	private $uri;
-	private $title;
-	/** @var FormCollection */
-	private $forms;
 
-	public function __construct($uri, $title)
+	public function __construct($uri, Crawler $crawler)
 	{
-	    $this->uri = $uri;
-	    $this->title = $title;
-	    $this->forms = new FormCollection;
+		$this->uri = $uri;
+	    $this->crawler = $crawler;
+	}
+
+	/** @return FormsCollection */
+	public function getForms()
+	{
+		$forms = new FormsCollection;
+		// find all forms and put them in a FormCollection
+		$crawler = $this->crawler->filter('form');
+		$count = count($crawler);
+		for($i = 1; $i <= $count; ++$i) {
+			$forms->add(new Form($crawler->eq($i-1)));
+		}
+		return $forms;
 	}
 
 	public function getUri()
 	{
-	    return $this->uri;
-	}
-
-	public function getTitle()
-	{
-	    return $this->title;
-	}
-
-	/** @return Collection */
-	public function getForms()
-	{
-		return $this->forms;
+		return $this->uri;
 	}
 
 }

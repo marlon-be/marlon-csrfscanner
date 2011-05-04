@@ -20,6 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
 	<p><?php echo $message ?></p>
 	<form name="goodform" method="POST">
+		foobartext
 		<input type="text" name="email" />
 		<input type="hidden" name="token" value="randomtokenxyz" />
 	</form>

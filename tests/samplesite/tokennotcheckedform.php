@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 <html>
 <head>
-<title>Good Form</title>
+<title>Token not checked Form</title>
 </head>
 <body>
 	<p><?php echo $message ?></p>

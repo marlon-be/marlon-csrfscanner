@@ -8,19 +8,26 @@ use Scanner\Entity\Profile;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
+	/** @var Profile */
+	private $profile;
+
 	/** @return Profile*/
 	protected function getProfile()
 	{
-		$profile = new Profile;
+		if(!isset($this->profile))
+		{
+			$this->profile = new Profile;
 
-		// Load samplesite.profile, fall back to samplesite.profile.dist
-		$sampleprofile = __DIR__.'/../../samplesite.profile';
-		if(file_exists($sampleprofile)) {
-			$profile->loadFile($sampleprofile);
-		} else {
-			$profile->loadFile("$sampleprofile.dist");
+			// Load samplesite.profile, fall back to samplesite.profile.dist
+			$sampleprofile = __DIR__.'/../../samplesite.profile';
+			if(file_exists($sampleprofile)) {
+				$this->profile->loadFile($sampleprofile);
+			} else {
+				$this->profile->loadFile("$sampleprofile.dist");
+			}
+
 		}
 
-		return $profile;
+		return $this->profile;
 	}
 }
