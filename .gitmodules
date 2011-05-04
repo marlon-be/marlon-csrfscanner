@@ -4,3 +4,15 @@
 [submodule "vendor/Symfony/Component/ClassLoader"]
 	path = vendor/Symfony/Component/ClassLoader
 	url = https://github.com/symfony/ClassLoader.git
+[submodule "vendor/Symfony/Component/HttpFoundation"]
+	path = vendor/Symfony/Component/HttpFoundation
+	url = https://github.com/symfony/HttpFoundation.git
+[submodule "vendor/Symfony/Component/DomCrawler"]
+	path = vendor/Symfony/Component/DomCrawler
+	url = https://github.com/symfony/DomCrawler.git
+[submodule "vendor/Symfony/Component/CssSelector"]
+	path = vendor/Symfony/Component/CssSelector
+	url = https://github.com/symfony/CssSelector.git
+[submodule "vendor/Symfony/Component/BrowserKit"]
+	path = vendor/Symfony/Component/BrowserKit
+	url = https://github.com/symfony/BrowserKit.git
