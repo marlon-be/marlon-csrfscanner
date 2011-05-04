@@ -9,7 +9,7 @@ class Application extends BaseApplication
 		parent::__construct($name, $version);
 
         $this->addCommands(array(
-            new \Scanner\Console\TestCommand,
+            new \Scanner\Console\ScanCommand,
         ));
 	}
 }
