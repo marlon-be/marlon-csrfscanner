@@ -10,7 +10,7 @@ class Page
 	/** @var FormCollection */
 	private $forms;
 
-	public function __construct($uri, $page)
+	public function __construct($uri, $title)
 	{
 	    $this->uri = $uri;
 	    $this->title = $title;

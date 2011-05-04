@@ -1,8 +1,7 @@
 <?php
 namespace Scanner\Console;
 
-use Scanner\Exception\FileNotFoundException;
-
+use Scanner\Entity\Profile;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
@@ -28,12 +27,9 @@ class ScanCommand extends Command
 	{
 		//$foo = $this->getHelper('foo');
 
-		$profile = getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile');
-		if(!file_exists($profile)) {
-			throw new FileNotFoundException("Profile not found: $profile");
-		}
+		$profile = new Profile;
+		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
 
-		$output->writeln("<info>Loading profile $profile</info>");
 
 	}
 }
