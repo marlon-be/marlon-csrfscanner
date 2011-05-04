@@ -1,21 +1,20 @@
 <?php
 namespace Scanner\Entity;
 
-use Scanner\Collection\ArrayCollection;
-use Scanner\Collection\Collection;
+use Scanner\Collection\FormCollection;
 
 class Page
 {
 	private $uri;
 	private $title;
-	/** @var Collection */
+	/** @var FormCollection */
 	private $forms;
 
 	public function __construct($uri, $page)
 	{
 	    $this->uri = $uri;
 	    $this->title = $title;
-	    $this->forms = new ArrayCollection;
+	    $this->forms = new FormCollection;
 	}
 
 	public function getUri()
