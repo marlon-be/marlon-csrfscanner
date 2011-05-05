@@ -1,9 +1,10 @@
 <?php
-use Goutte\Client;
-use Scanner\Application;
-use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Application;
 
 $version = file_get_contents(__DIR__.'/../VERSION');
 $cli = new Application('Csrf Scanner', $version);
+$cli->addCommands(array(
+	new \Scanner\Console\ScanCommand,
+));
 $cli->setCatchExceptions(true);
 $cli->run();
