@@ -15,4 +15,11 @@ class PagesCollection extends ArrayCollection
         $this->_elements[$value->getUri()] = $value;
         return true;
     }
+
+    public function pop()
+    {
+		$element = $this->last();
+		$this->removeElement($element);
+		return $element;
+    }
 }
