@@ -1,5 +1,6 @@
 <?php
 namespace Test\Scanner\Collection;
+
 use Scanner\Entity\Page;
 use Scanner\Collection\PagesCollection;
 use Test\Scanner\TestCase;
@@ -40,6 +41,7 @@ class PagesCollectionTest extends TestCase
 		$this->assertEquals(0, count($collection));
 	}
 
+	/** @test */
 	public function UriDeterminesEquality()
 	{
 		$collection = new PagesCollection;
@@ -50,4 +52,17 @@ class PagesCollectionTest extends TestCase
 
 		$this->assertTrue($collection->contains($page2), "When a Page with the same URI already exists in the Collection, contains() should return true");
 	}
+
+
+	/**
+	 * @test
+	 * @expectedException InvalidArgumentException
+	 */
+	public function OnlyAcceptsPages()
+	{
+		$collection = new PagesCollection(array(
+			new \stdClass
+		));
+	}
+
 }

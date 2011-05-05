@@ -6,6 +6,13 @@ use Scanner\Entity\Page;
 
 class PagesCollection extends ArrayCollection
 {
+	public function __construct(array $elements = array())
+	{
+		foreach($elements as $element) {
+			$this->add($element);
+		}
+	}
+
     public function add($value)
     {
     	if(!$value instanceof Page)
