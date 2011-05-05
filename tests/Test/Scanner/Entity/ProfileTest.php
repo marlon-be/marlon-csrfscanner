@@ -2,28 +2,25 @@
 namespace Test\Scanner\Entity;
 
 use Scanner\Entity\Profile;
-use Test\Scanner\TestCase;
+use Test\Scanner\ProfileTestCase;
 
-require_once __DIR__.'/../TestCase.php';
+require_once __DIR__.'/../ProfileTestCase.php';
 
-class ProfileTest extends TestCase
+class ProfileTest extends ProfileTestCase
 {
 	/** @test */
 	public function LoadingAProfilePopulatesAttributes()
 	{
-		$profile = $this->getProfile();
-
-		$this->assertInstanceOf('Scanner\Collection\PagesCollection', $profile->getStartpages());
-		$this->assertEquals(1, count($profile->getStartpages()));
-		$this->assertInstanceOf('Scanner\Collection\RulesCollection', $profile->getRules());
-		$this->assertEquals(1, count($profile->getRules()));
-		$this->assertAttributeInstanceOf('Goutte\Client', 'client', $profile);
+		$this->assertInstanceOf('Scanner\Collection\PagesCollection', $this->profile->getStartpages());
+		$this->assertEquals(1, count($this->profile->getStartpages()));
+		$this->assertInstanceOf('Scanner\Collection\RulesCollection', $this->profile->getRules());
+		$this->assertEquals(1, count($this->profile->getRules()));
+		$this->assertAttributeInstanceOf('Goutte\Client', 'client', $this->profile);
 	}
 
 	/** @test */
 	public function SpidersAllPagesInASite()
 	{
-		$profile = $this->getProfile();
-		$this->assertEquals(4, count($profile->getAllPages()));
+		$this->assertEquals(4, count($this->profile->getAllPages()));
 	}
 }

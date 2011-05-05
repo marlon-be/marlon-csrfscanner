@@ -2,16 +2,16 @@
 namespace Test\Scanner\Entity;
 
 use Scanner\Entity\Page;
-use Test\Scanner\TestCase;
+use Test\Scanner\ProfileTestCase;
 
-require_once __DIR__.'/../TestCase.php';
+require_once __DIR__.'/../ProfileTestCase.php';
 
-class PageTest extends TestCase
+class PageTest extends ProfileTestCase
 {
 	/** @test */
 	public function FindsAllLinkedPages()
 	{
-		$startpage = $this->getProfile()->getStartPages()->first();
+		$startpage = $this->profile->getStartPages()->first();
 
 		$linkedpages = $startpage->findLinkedPages();
 

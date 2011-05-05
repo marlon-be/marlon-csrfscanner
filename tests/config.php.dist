@@ -2,7 +2,7 @@
 class Config
 {
 	/**
-	 * Point this to /tests/minisite
+	 * Point this to /tests/minisite, end with slash
 	 */
-	const MINISITE = 'http://localhost/minisite';
+	const MINISITE = 'http://localhost/minisite/';
 }

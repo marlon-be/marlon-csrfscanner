@@ -24,11 +24,9 @@ class Spider
 					{
 						$todo->add($found);
 					}
-echo count($todo).PHP_EOL;
 				}
 			}
 			$done->add($current);
-echo PHP_EOL.PHP_EOL;
 		}
 
 		return $done;

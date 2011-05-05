@@ -12,6 +12,10 @@ use Goutte\Client;
 
 use Scanner\Exception\FileNotFoundException;
 
+/**
+ * A profile encapsulates a site and the rules it should be tested for.
+ *
+ */
 class Profile
 {
 	/** @var RulesCollection */
