@@ -1,16 +1,10 @@
 <?php
 namespace Scanner\Entity;
 use Scanner\Tools\Spider;
-
 use Scanner\Rule\Rule;
-
 use Scanner\Collection\RulesCollection;
-
 use Scanner\Collection\PagesCollection;
-
 use Goutte\Client;
-
-use Scanner\Exception\FileNotFoundException;
 
 /**
  * A profile encapsulates a site and the rules it should be tested for.
@@ -23,9 +17,6 @@ class Profile
 
 	/** @var PagesCollection */
 	private $startpages;
-
-	/** @var PagesCollection All spidered pages */
-	private $allpages;
 
 	/** @var Client */
 	private $client;
@@ -60,14 +51,10 @@ class Profile
 	}
 
 	/** @return PagesCollection All spidered pages */
-	public function getAllPages()
+	public function spider()
 	{
-		if(!isset($this->allpages))
-		{
-			$spider = new Spider;
-			$this->allpages = $spider->spider($this->startpages);
-		}
-		return $this->allpages;
+		$spider = new Spider;
+		return $spider->spider($this->startpages);
 	}
 
 	public function getRules()

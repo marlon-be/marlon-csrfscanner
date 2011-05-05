@@ -8,20 +8,27 @@ class PagesCollection extends ArrayCollection
 {
 	public function __construct(array $elements = array())
 	{
+		parent::__construct();
 		foreach($elements as $element) {
 			$this->add($element);
 		}
 	}
 
+	private function check(Page $value)
+	{
+		// empty, the type hinting will check if $value is a Page instance
+	}
+
     public function add($value)
     {
-    	if(!$value instanceof Page)
-		{
-			throw new \InvalidArgumentException("The page must be an instance of Scanner\Entity\Page");
-		}
+    	$this->check($value);
+        return $this->set($value->getUri(), $value);
+    }
 
-        $this[$value->getUri()] = $value;
-        return true;
+    public function set($key, $value)
+    {
+    	$this->check($value);
+		return parent::set($key, $value);
     }
 
     public function pop()

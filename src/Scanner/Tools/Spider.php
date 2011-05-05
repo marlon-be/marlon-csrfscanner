@@ -12,7 +12,6 @@ class Spider
 	{
 		$todo = clone $startpages;
 		$done = new PagesCollection;
-
 		while(count($todo))
 		{
 			$current = $todo->pop();

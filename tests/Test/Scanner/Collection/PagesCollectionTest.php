@@ -44,25 +44,15 @@ class PagesCollectionTest extends TestCase
 	/** @test */
 	public function UriDeterminesEquality()
 	{
-		$collection = new PagesCollection;
-		$page1 = new Page('http://example/foo');
-		$page2 = new Page('http://example/foo');
+		$collection = new PagesCollection(array(
+			$page1 = new Page('http://example/foo'),
+			$page2 = new Page('http://example/foo'),
+		));
 
 		$collection->add($page1);
 
 		$this->assertTrue($collection->contains($page2), "When a Page with the same URI already exists in the Collection, contains() should return true");
 	}
 
-
-	/**
-	 * @test
-	 * @expectedException InvalidArgumentException
-	 */
-	public function OnlyAcceptsPages()
-	{
-		$collection = new PagesCollection(array(
-			new \stdClass
-		));
-	}
 
 }

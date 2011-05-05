@@ -21,6 +21,6 @@ class ProfileTest extends ProfileTestCase
 	/** @test */
 	public function SpidersAllPagesInASite()
 	{
-		$this->assertEquals(4, count($this->profile->getAllPages()));
+		$this->assertEquals(4, count($this->profile->spider()));
 	}
 }
