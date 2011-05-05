@@ -1,4 +1,5 @@
 .settings
 .buildpath
 .project
-tests/samplesite.profile
+tests/config.php
+build/

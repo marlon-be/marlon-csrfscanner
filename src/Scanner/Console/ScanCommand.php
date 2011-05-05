@@ -1,14 +1,7 @@
 <?php
 namespace Scanner\Console;
 
-use Scanner\Collection\RulesCollection;
-
-use Scanner\Rule\HiddenTokenFieldRule;
-
-use Scanner\Entity\Page;
-
-use Scanner\Collection\PageCollection;
-
+use Goutte\Client;
 use Scanner\Entity\Profile;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -35,23 +28,17 @@ class ScanCommand extends Command
 	{
 		$indent = '    ';
 
-		//$foo = $this->getHelper('foo');
-
-		$profile = new Profile;
+		$profile = new Profile(new Client);
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
 
-		$rules = new RulesCollection(array(
-			new HiddenTokenFieldRule(),
-		));
-
-		foreach($profile->getPages() as $page)
+		foreach($profile->getAllPages() as $page)
 		{
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
 				$output->writeLn($indent.$form->getName());
 
-				foreach($rules as $rule)
+				foreach($profile->getRules() as $rule)
 				{
 					if(!$rule->isValid($form)) {
 						$output->writeLn($indent.$indent."<error>".$rule->getMessage()."</error>");

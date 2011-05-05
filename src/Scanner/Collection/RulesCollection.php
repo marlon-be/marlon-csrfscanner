@@ -7,8 +7,7 @@ class RulesCollection extends ArrayCollection
 {
 	public function __construct(array $elements = array())
 	{
-		foreach($elements as $element)
-		{
+		foreach($elements as $element) {
 			$this->add($element);
 		}
 	}

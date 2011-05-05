@@ -1,12 +1,16 @@
 <?php
+
 namespace Test\Scanner;
+
+use Goutte\Client;
+use Scanner\Entity\Profile;
+use PHPUnit_Framework_TestCase;
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once __DIR__.'/../../../app/autoload.php';
 
-use Scanner\Entity\Profile;
 
-class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends PHPUnit_Framework_TestCase
 {
 	/** @var Profile */
 	private $profile;
@@ -16,18 +20,24 @@ class TestCase extends \PHPUnit_Framework_TestCase
 	{
 		if(!isset($this->profile))
 		{
-			$this->profile = new Profile;
+			$this->profile = new Profile(new Client);
 
-			// Load samplesite.profile, fall back to samplesite.profile.dist
-			$sampleprofile = __DIR__.'/../../samplesite.profile';
-			if(file_exists($sampleprofile)) {
-				$this->profile->loadFile($sampleprofile);
+			// Load Config.php, fall back to Config.php.dist
+			$config = __DIR__.'/../../Config.php';
+			if(file_exists($config)) {
+				require_once $config;
 			} else {
-				$this->profile->loadFile("$sampleprofile.dist");
+				require_once "$config.dist";
 			}
-
+			$this->profile->loadFile( __DIR__.'/../../minisite.profile');
 		}
 
 		return $this->profile;
 	}
+
+	protected function getClient()
+	{
+		return new Client;
+	}
+
 }

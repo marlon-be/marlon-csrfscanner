@@ -1,2 +1,0 @@
-<?php
-$this->setDomain('http://localhost/samplesite');

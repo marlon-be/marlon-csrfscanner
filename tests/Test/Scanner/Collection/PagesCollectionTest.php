@@ -1,20 +1,20 @@
 <?php
 namespace Test\Scanner\Collection;
 use Scanner\Entity\Page;
-use Scanner\Collection\PageCollection;
+use Scanner\Collection\PagesCollection;
 use Test\Scanner\TestCase;
 
 require_once __DIR__.'/../TestCase.php';
 
-class PageCollectionTest extends TestCase
+class PagesCollectionTest extends TestCase
 {
 	/** @test */
 	public function PagesCanOnlyBeAddedOnce()
 	{
-		$collection = new PageCollection;
-		$page1 = new Page('http://example/foo', 'foo title');
-		$page2 = new Page('http://example/foo', 'foo2 title');
-		$page3 = new Page('http://example/bar', 'bar title');
+		$collection = new PagesCollection;
+		$page1 = new Page('http://example/foo');
+		$page2 = new Page('http://example/foo');
+		$page3 = new Page('http://example/bar');
 
 		$collection->add($page1);
 		$collection->add($page1); // add it twice

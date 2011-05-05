@@ -1,0 +1,8 @@
+<?php
+class Config
+{
+	/**
+	 * Point this to /tests/minisite
+	 */
+	const MINISITE = 'http://localhost/minisite';
+}

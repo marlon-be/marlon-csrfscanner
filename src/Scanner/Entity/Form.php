@@ -1,24 +1,19 @@
 <?php
 namespace Scanner\Entity;
 
-use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\DomCrawler\Form as CrawlerForm;
 
 class Form
 {
-	/** @var Crawler */
-	private $crawler;
+	/** @var Symfony\Component\DomCrawler\Form */
+	private $crawlerform;
 
 	/** @var bool */
 	private $valid = true;
 
-	public function __construct(Crawler $crawler)
+	public function __construct(CrawlerForm $crawlerform)
 	{
-		$this->crawler = $crawler;
-	}
-
-	public function getName()
-	{
-	    return $this->crawler->attr('name');
+		$this->crawlerform = $crawlerform;
 	}
 
 	public function setValid()
@@ -36,16 +31,11 @@ class Form
 		return $this->valid;
 	}
 
-	public function filter($selector)
-	{
-		return $this->crawler->filter($selector);
-	}
-
 	/**
-	 * Forward calls to Crawler, useful during testing
+	 * Forward calls to Symfony\Component\DomCrawler\Form
 	 */
 	public function __call($method, $args)
 	{
-		return call_user_func_array(array($this->crawler, $method), $args);
+		return call_user_func_array(array($this->crawlerform, $method), $args);
 	}
 }

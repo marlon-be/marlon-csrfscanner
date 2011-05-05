@@ -1,5 +1,10 @@
 <?php
 namespace Scanner\Entity;
+use Scanner\Tools\Spider;
+
+use Scanner\Rule\Rule;
+
+use Scanner\Collection\RulesCollection;
 
 use Scanner\Collection\PagesCollection;
 
@@ -9,32 +14,65 @@ use Scanner\Exception\FileNotFoundException;
 
 class Profile
 {
-	private $domain;
+	/** @var RulesCollection */
+	private $rules;
+
+	/** @var PagesCollection */
+	private $startpages;
+
+	/** @var PagesCollection All spidered pages */
+	private $allpages;
+
+	/** @var Client */
+	private $client;
+
+	public function __construct(Client $client)
+	{
+		$this->client = $client;
+		$this->rules = new RulesCollection;
+		$this->startpages = new PagesCollection;
+	}
 
 	public function loadFile($filename)
 	{
-		if(!file_exists($filename)) {
-			throw new FileNotFoundException("Profile not found: $filename");
+		require $filename;
+	}
+
+	public function addRules(array $rules)
+	{
+		foreach($rules as $rule) {
+			$this->rules->add($rule);
 		}
-		include $filename;
 	}
 
-	public function setDomain($domain)
+	public function addStartPages(array $uris)
 	{
-		$this->domain = $domain;
+		foreach($uris as $uri)
+		{
+			$page = new Page($uri);
+			$page->setClient($this->client);
+			$this->startpages->add($page);
+		}
 	}
 
-	/** @return PagesCollection */
-	public function getPages()
+	/** @return PagesCollection All spidered pages */
+	public function getAllPages()
 	{
-		$client = new Client;
-		$pages = new PagesCollection;
-		$uri = $this->domain.'/goodform.php';
-		$pages->add(new Page($uri, $client->request('GET', $uri)));
-		$uri = $this->domain.'/notokenform.php';
-		$pages->add(new Page($uri, $client->request('GET', $uri)));
-		$uri = $this->domain.'/tokennotcheckedform.php';
-		$pages->add(new Page($uri, $client->request('GET', $uri)));
-		return $pages;
+		if(!isset($this->allpages))
+		{
+			$spider = new Spider;
+			$this->allpages = $spider->spider($this->startpages);
+		}
+		return $this->allpages;
+	}
+
+	public function getRules()
+	{
+	    return $this->rules;
+	}
+
+	public function getStartPages()
+	{
+	    return $this->startpages;
 	}
 }
