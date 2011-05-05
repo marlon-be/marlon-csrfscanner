@@ -22,7 +22,7 @@ Usage
 -----
 * git clone url/to/csrf-scanner csrf-scanner
 * Create a file called yoursite.profile, see tests/minisite.profile for an example
-* execute bin/csrf-scan scan path/to/profile
+* execute bin/csrfscan scan path/to/profile
 
 WARNING
 -------
