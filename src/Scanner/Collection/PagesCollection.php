@@ -22,4 +22,9 @@ class PagesCollection extends ArrayCollection
 		$this->removeElement($element);
 		return $element;
     }
+
+	public function contains($element)
+    {
+        return parent::contains($element) || parent::containsKey($element->getUri());
+    }
 }

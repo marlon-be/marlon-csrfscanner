@@ -39,4 +39,15 @@ class PagesCollectionTest extends TestCase
 		$this->assertSame($page1, $collection->pop());
 		$this->assertEquals(0, count($collection));
 	}
+
+	public function UriDeterminesEquality()
+	{
+		$collection = new PagesCollection;
+		$page1 = new Page('http://example/foo');
+		$page2 = new Page('http://example/foo');
+
+		$collection->add($page1);
+
+		$this->assertTrue($collection->contains($page2), "When a Page with the same URI already exists in the Collection, contains() should return true");
+	}
 }
