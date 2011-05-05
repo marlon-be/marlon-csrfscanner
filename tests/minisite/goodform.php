@@ -28,6 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		<li><a href="goodform.php">Good form</a></li>
 		<li><a href="notokenform.php">Form without token</a></li>
 		<li><a href="tokennotcheckedform.php">Token not checked</a></li>
+		<li><a href="nestedpage.php">Nested page</a></li>
 	</ul>
 </body>
 </html>
