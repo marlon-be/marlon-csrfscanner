@@ -22,3 +22,6 @@
 [submodule "vendor/goutte"]
 	path = vendor/goutte
 	url = https://github.com/fabpot/Goutte.git
+[submodule "vendor/doctrine-common"]
+	path = vendor/doctrine-common
+	url = https://github.com/doctrine/common.git

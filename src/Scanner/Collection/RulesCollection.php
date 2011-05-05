@@ -1,6 +1,7 @@
 <?php
 namespace Scanner\Collection;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Scanner\Rule\Rule;
 
 class RulesCollection extends ArrayCollection

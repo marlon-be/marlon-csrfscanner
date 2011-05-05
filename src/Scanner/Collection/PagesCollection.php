@@ -1,6 +1,7 @@
 <?php
 namespace Scanner\Collection;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Scanner\Entity\Page;
 
 class PagesCollection extends ArrayCollection
@@ -12,7 +13,7 @@ class PagesCollection extends ArrayCollection
 			throw new \InvalidArgumentException("The page must be an instance of Scanner\Entity\Page");
 		}
 
-        $this->_elements[$value->getUri()] = $value;
+        $this[$value->getUri()] = $value;
         return true;
     }
 

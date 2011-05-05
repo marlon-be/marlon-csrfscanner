@@ -1,6 +1,7 @@
 <?php
 namespace Scanner\Collection;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Scanner\Entity\Form;
 
 class FormsCollection extends ArrayCollection
