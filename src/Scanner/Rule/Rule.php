@@ -3,7 +3,6 @@ namespace Scanner\Rule;
 
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\BrowserKit\Client;
-//use Scanner\Entity\Form;
 
 interface Rule
 {

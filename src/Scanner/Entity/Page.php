@@ -3,12 +3,10 @@ namespace Scanner\Entity;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Link;
-use Symfony\Component\DomCrawler\Form as CrawlerForm;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\DomCrawler\Crawler;
 use Scanner\Collection\PagesCollection;
 use Scanner\Collection\FormsCollection;
-use Scanner\Entity\Form;
-
 
 class Page
 {
@@ -67,19 +65,18 @@ class Page
 			'%s//input[@type="submit"] | %s//button | %s//input[@type="button"] | %s//input[@type="image"]',
 			$formname, $formname, $formname, $formname)
 		);
-		if(count($crawler))
-		{
-			$crawlerform = $crawler->form();
+		if(count($crawler)) {
+			$form = $crawler->form();
 		}
 		else
 		{
-			// no buttons where found, add one ourselves
+			// no submit buttons where found, add one ourselves
 			$submit  = $node->ownerDocument->createElement('input');
 			$submit->setAttribute('type', 'submit');
 			$node->appendChild($submit);
-			$crawlerform = new CrawlerForm($submit, $this->getUri(), 'post');
+			$form = new Form($submit, $this->getUri(), 'post');
 		}
-		return ($crawlerform);
+		return ($form);
 	}
 
 	/** @return FormsCollection */
