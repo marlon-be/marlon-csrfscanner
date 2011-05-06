@@ -38,7 +38,8 @@ class ScanCommand extends Command
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
-				$output->writeLn($indent.$leaf.$form->getFormNode()->getAttribute('name'));
+				$name = $form->getFormNode()->getAttribute('name');
+				$output->writeLn($indent.$leaf.sprintf('<form name="%s">', $name));
 				foreach($profile->getRules() as $rule)
 				{
 					$rule->setClient($client);
