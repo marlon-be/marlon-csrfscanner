@@ -30,7 +30,7 @@ class Page
 	public function getCrawler()
 	{
 		if(!isset($this->crawler)) {
-			$this->crawler = $this->client->request('GET', $this->uri);
+			$this->crawler = $this->client->request('GET', $this->getUri());
 		}
 		return $this->crawler;
 	}
