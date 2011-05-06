@@ -1,7 +1,6 @@
 <?php
 namespace Test\Scanner\Collection;
 
-use Scanner\Entity\Form;
 use Scanner\Collection\FormsCollection;
 use Test\Scanner\TestCase;
 
@@ -24,7 +23,7 @@ class FormsCollectionTest extends TestCase
 	public function AcceptsForms()
 	{
 		$collection = new FormsCollection(array(
-			$this->getMock('Scanner\Entity\Form', array(), array(), 'SomeForm', false)
+			$this->getMock('Symfony\Component\DomCrawler\Form', array(), array(), 'SomeForm', false)
 		));
 	}
 }

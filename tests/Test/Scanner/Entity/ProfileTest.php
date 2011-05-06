@@ -14,7 +14,7 @@ class ProfileTest extends ProfileTestCase
 		$this->assertInstanceOf('Scanner\Collection\PagesCollection', $this->profile->getStartpages());
 		$this->assertEquals(1, count($this->profile->getStartpages()));
 		$this->assertInstanceOf('Scanner\Collection\RulesCollection', $this->profile->getRules());
-		$this->assertEquals(1, count($this->profile->getRules()));
+		$this->assertEquals(2, count($this->profile->getRules()));
 		$this->assertAttributeInstanceOf('Goutte\Client', 'client', $this->profile);
 	}
 
