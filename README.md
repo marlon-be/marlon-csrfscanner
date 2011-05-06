@@ -10,6 +10,13 @@ The typical flow of CSRF Scanner is as follows:
 - submits each form while messing with the token
 - checks whether they are sufficiently protected. 
 
+WARNING
+-------
+Don't test this on a live site, as it will perform all kinds of form submissions 
+which you might not like, screw up your database and probably DoS the site as well.
+
+Use on a disposable test site!
+
 Assumptions
 -----------
 At the moment, the scanner assumes that to be protected:
@@ -29,10 +36,24 @@ Usage
 * Create a file called yoursite.profile, see sample.profile for an example
 * execute bin/csrfscan scan path/to/profile
 
-WARNING
--------
-Don't test this on a live site, as it will perform all kinds of form submissions 
-which you might not like, screw up your database and probably DoS the site as well.
+Output
+------
+The output looks something like this:
+```
+http://localhost:8888/csrfscan-minisite/
 
-Use on a disposable test site!
+http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php
+   |_ tokennotcheckedform
+      |_ 403 response expected, but got a 200
 
+http://localhost:8888/csrfscan-minisite/notokenform.php
+   |_ notokenform
+      |_ No 'token' input field found
+
+http://localhost:8888/csrfscan-minisite/goodform.php
+   |_ goodform
+   |_ bogusform
+      |_ No 'token' input field found
+
+http://localhost:8888/csrfscan-minisite/nestedpage.php
+```
