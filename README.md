@@ -28,7 +28,8 @@ What it doesn't do
 ------------------
 - If on your site, GET requests can cause damage, this tool will not detect that. Just never allow GET for non-idempotent requests.
 - Javascript submissions etc 
-- When forms have multiple submit buttons, the form is only tested for one of them
+- When forms have multiple submit buttons, the form is only tested for one of them.
+- Fragments (the part after the # in a URI) are ignored
 
 Usage
 -----

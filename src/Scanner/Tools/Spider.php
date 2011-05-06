@@ -19,9 +19,7 @@ class Spider
 			{
 				foreach($current->findLinkedPages() as $found)
 				{
-					$found->dropFragment();
-					if(!$done->contains($found))
-					{
+					if(!$done->contains($found)) {
 						$todo->add($found);
 					}
 				}

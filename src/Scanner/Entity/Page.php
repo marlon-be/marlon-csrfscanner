@@ -19,7 +19,7 @@ class Page
 
 	public function __construct($uri)
 	{
-		$this->uri = $uri;
+		$this->uri = $this->dropFragment($uri);
 	}
 
 	public function setClient(Client $client)
@@ -101,8 +101,9 @@ class Page
 	/**
 	 * Removes the part after the #
 	 */
-	public function dropFragment()
+	private function dropFragment($uri)
 	{
-		list($this->uri) = explode('#', $this->uri);
+		list($uri) = explode('#', $uri);
+		return $uri;
 	}
 }
