@@ -26,7 +26,7 @@ What it doesn't do
 Usage
 -----
 * git clone url/to/csrf-scanner csrf-scanner
-* Create a file called yoursite.profile, see tests/minisite.profile for an example
+* Create a file called yoursite.profile, see sample.profile for an example
 * execute bin/csrfscan scan path/to/profile
 
 WARNING

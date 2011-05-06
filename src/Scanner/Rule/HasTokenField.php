@@ -1,12 +1,12 @@
 <?php
 namespace Scanner\Rule;
 
-use Scanner\Entity\Form;
+use Symfony\Component\DomCrawler\Form;
 
 /**
  * Test if a form has a hidden token field
  */
-class HasTokenFieldRule implements Rule
+class HasTokenField extends AbstractRule
 {
 	public function isValid(Form $form)
 	{

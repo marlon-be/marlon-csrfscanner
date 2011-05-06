@@ -2,7 +2,7 @@
 namespace Scanner\Entity;
 
 use Symfony\Component\DomCrawler\Form as CrawlerForm;
-
+throw new Exception('@deprecated');
 class Form
 {
 	/** @var Symfony\Component\DomCrawler\Form */

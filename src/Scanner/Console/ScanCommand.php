@@ -26,10 +26,11 @@ class ScanCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$client = new Client;
 		$indent = '   ';
 		$leaf = '|_ ';
 
-		$profile = new Profile(new Client);
+		$profile = new Profile($client);
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
 
 		foreach($profile->spider() as $page)
@@ -37,9 +38,10 @@ class ScanCommand extends Command
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
-				$output->writeLn($indent.$leaf.$form->getName());
+				$output->writeLn($indent.$leaf.$form->getFormNode()->getAttribute('name'));
 				foreach($profile->getRules() as $rule)
 				{
+					$rule->setClient($client);
 					if(!$rule->isValid($form)) {
 						$output->writeLn($indent.$indent.$leaf."<error>".$rule->getMessage()."</error>");
 					}

@@ -1,9 +1,9 @@
 <?php
 $this->addStartpages(array(
-	Config::MINISITE,
+	'http://localhost/minisite/',
 ));
 
 $this->addRules(array(
-	new Scanner\Rule\HasTokenField,
+	//new Scanner\Rule\HasTokenField,
 	new Scanner\Rule\ModifyingTokenCauses403,
 ));

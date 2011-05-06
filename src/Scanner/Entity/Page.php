@@ -79,7 +79,7 @@ class Page
 			$node->appendChild($submit);
 			$crawlerform = new CrawlerForm($submit, $this->getUri(), 'post');
 		}
-		return new Form($crawlerform);
+		return ($crawlerform);
 	}
 
 	/** @return FormsCollection */
