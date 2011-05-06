@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ScanCommand extends Command
 {
+	const EXIT_SUCCESS = 0;
+	const EXIT_FAIL = 1;
+
 	protected function configure()
 	{
 		$this
@@ -29,6 +32,7 @@ class ScanCommand extends Command
 		$client = new Client;
 		$indent = '   ';
 		$leaf = '|_ ';
+		$violations = 0;
 
 		$profile = new Profile($client);
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
@@ -43,8 +47,10 @@ class ScanCommand extends Command
 				foreach($profile->getRules() as $rule)
 				{
 					$rule->setClient($client);
-					if(!$rule->isValid($form)) {
+					if(!$rule->isValid($form))
+					{
 						$output->writeLn($indent.$indent.$leaf."<error>".$rule->getMessage()."</error>");
+						++$violations;
 					}
 
 				}
@@ -52,6 +58,12 @@ class ScanCommand extends Command
 			$output->writeLn('');
 		}
 
-		$output->writeln('<info>Done.</info>');
+		if($violations) {
+			$output->writeln("<error>$violations violations found.</error>");
+			return self::EXIT_FAIL;
+		} else {
+			$output->writeln('<info>Done.</info>');
+			return self::EXIT_SUCCESS;
+		}
 	}
 }
