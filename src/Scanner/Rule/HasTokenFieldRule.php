@@ -6,7 +6,7 @@ use Scanner\Entity\Form;
 /**
  * Test if a form has a hidden token field
  */
-class HiddenTokenFieldRule implements Rule
+class HasTokenFieldRule implements Rule
 {
 	public function isValid(Form $form)
 	{

@@ -4,5 +4,5 @@ $this->addStartpages(array(
 ));
 
 $this->addRules(array(
-	new Scanner\Rule\HiddenTokenFieldRule,
+	new Scanner\Rule\HasTokenFieldRule,
 ));
