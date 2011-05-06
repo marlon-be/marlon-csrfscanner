@@ -10,7 +10,7 @@ class HiddenTokenFieldRule implements Rule
 {
 	public function isValid(Form $form)
 	{
-		return count($form->filter("input[name='token']"));
+		return $form->has('token');
 	}
 
 	public function getMessage()

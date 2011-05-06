@@ -38,7 +38,6 @@ class ScanCommand extends Command
 			foreach($page->getForms() as $form)
 			{
 				$output->writeLn($indent.$leaf.$form->getName());
-continue;
 				foreach($profile->getRules() as $rule)
 				{
 					if(!$rule->isValid($form)) {
