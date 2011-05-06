@@ -98,4 +98,11 @@ class Page
 		return $this->uri;
 	}
 
+	/**
+	 * Removes the part after the #
+	 */
+	public function dropFragment()
+	{
+		list($this->uri) = explode('#', $this->uri);
+	}
 }
