@@ -22,6 +22,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<form name="goodform" method="POST">
 		<input type="text" name="email" />
 		<input type="hidden" name="token" value="randomtokenxyz" />
+		<button name="somebutton">Some button</button>
+		<input type="button" name="inputwithtypebutton" />
+		<input type="submit" name="inputwithtypesubmit" />
+		<input type="image" name="inputwithtypeimage" />
 	</form>
 	<br />
 	<ul>
@@ -30,5 +34,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		<li><a href="tokennotcheckedform.php">Token not checked</a></li>
 		<li><a href="nestedpage.php">Nested page</a></li>
 	</ul>
+
+	<form name="bogusform" method="POST">
+	</form>
 </body>
 </html>

@@ -26,22 +26,23 @@ class ScanCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$indent = '    ';
+		$indent = '   ';
+		$leaf = '|_ ';
 
 		$profile = new Profile(new Client);
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
 
-		foreach($profile->getAllPages() as $page)
+		foreach($profile->spider() as $page)
 		{
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
-				$output->writeLn($indent.$form->getName());
-
+				$output->writeLn($indent.$leaf.$form->getName());
+continue;
 				foreach($profile->getRules() as $rule)
 				{
 					if(!$rule->isValid($form)) {
-						$output->writeLn($indent.$indent."<error>".$rule->getMessage()."</error>");
+						$output->writeLn($indent.$indent.$leaf."<error>".$rule->getMessage()."</error>");
 					}
 
 				}

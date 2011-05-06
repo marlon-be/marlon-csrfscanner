@@ -19,11 +19,13 @@ abstract class ProfileTestCase extends TestCase
 	public function setUp()
 	{
 		// Load config.php, fall back to config.php.dist
-		$configfile = __DIR__.'/../../Config.php';
+		$configfile = __DIR__.'/../../config.php';
 		if(file_exists($configfile)) {
 			require_once $configfile;
 		} else {
-			require_once "$configfile.dist";
+			// @codeCoverageIgnoreStart
+			$this->fail('This test requires a connection to the minisite. Publish /tests/minisite/ somewhere, copy /tests/config.php.dist to /tests/config.php and adjust it.');
+			// @codeCoverageIgnoreEnd
 		}
 
 		$this->profile = new Profile(new Client);

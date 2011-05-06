@@ -3,8 +3,12 @@ CSRF Scanner
 
 Protecting against CSRF is easy, and testing whether that protection is actually 
 present, is also easy. But testing a multitude of sites continuously is a drag. 
-CSRF Scanner crawls a website, finds forms, submits them and checks whether they
-are sufficiently protected. 
+
+The typical flow of CSRF Scanner is as follows:
+- spider a website to find all pages
+- on each page, find all forms
+- submits each form while messing with the token
+- checks whether they are sufficiently protected. 
 
 Assumptions
 -----------
@@ -15,8 +19,9 @@ Different rules can be added however.
 
 What it doesn't do
 ------------------
-If on your site, GET requests can cause damage, this tool will not detect that. 
-Just never allow GET for non-idempotent requests.
+- If on your site, GET requests can cause damage, this tool will not detect that. Just never allow GET for non-idempotent requests.
+- Javascript submissions etc 
+- When forms have multiple submit buttons, the form is only tested for one of them
 
 Usage
 -----

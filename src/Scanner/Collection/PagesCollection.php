@@ -31,6 +31,13 @@ class PagesCollection extends ArrayCollection
 		return parent::set($key, $value);
     }
 
+    public function shift()
+    {
+		$element = $this->first();
+		$this->removeElement($element);
+		return $element;
+    }
+
     public function pop()
     {
 		$element = $this->last();

@@ -11,11 +11,24 @@ class PageTest extends ProfileTestCase
 	/** @test */
 	public function FindsAllLinkedPages()
 	{
-		$startpage = $this->profile->getStartPages()->first();
+		$indexpage = $this->profile->getStartPages()->first();
 
-		$linkedpages = $startpage->findLinkedPages();
+		$linkedpages = $indexpage->findLinkedPages();
 
 		$this->assertInstanceOf('Scanner\Collection\PagesCollection', $linkedpages);
 		$this->assertEquals(3, count($linkedpages), 'Reading minisite/index.php should find 3 links');
+	}
+
+	/** @test */
+	public function FindsAllForms()
+	{
+		$allpages = $this->profile->spider();
+		$allpages->pop();
+		$goodformpage = $allpages->pop(); // we know that goodform.php is the one-to-last in the list
+
+		$foundforms = $goodformpage->getForms();
+
+		$this->assertInstanceOf('Scanner\Collection\FormsCollection', $foundforms);
+		$this->assertEquals(2, count($foundforms));
 	}
 }

@@ -31,11 +31,9 @@ class Form
 		return $this->valid;
 	}
 
-	/**
-	 * Forward calls to Symfony\Component\DomCrawler\Form
-	 */
-	public function __call($method, $args)
+	public function getName()
 	{
-		return call_user_func_array(array($this->crawlerform, $method), $args);
+		return $this->crawlerform->getFormNode()->getAttribute('name');
 	}
+
 }

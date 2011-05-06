@@ -18,7 +18,7 @@ class FormsCollection extends ArrayCollection
 	{
 		if(!$value instanceof Form)
 		{
-			throw new \InvalidArgumentException("The rule must be an instance of Scanner\Entity\Form");
+			throw new \InvalidArgumentException("The form must be an instance of Scanner\Entity\Form");
 		}
 		parent::add($value);
 	}
