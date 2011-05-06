@@ -25,6 +25,9 @@ class Profile
 	/** @var DomainsCollection */
 	private $domainWhitelist;
 
+	/** @var Closure */
+	private $prescript;
+
 	public function __construct(Client $client)
 	{
 		$this->client = $client;
@@ -36,6 +39,21 @@ class Profile
 	public function loadFile($filename)
 	{
 		require $filename;
+	}
+
+	/**
+	 * Set a script to be executed before scanning (eg a login script)
+	 */
+	public function setPreScript(\Closure $prescript)
+	{
+		$this->prescript = $prescript;
+	}
+
+	public function executePreScript()
+	{
+		if($script = $this->prescript) {
+			$script($this->client);
+		}
 	}
 
 	public function addRules(array $rules)

@@ -23,4 +23,14 @@ class ProfileTest extends ProfileTestCase
 	{
 		$this->assertEquals(5, count($this->profile->spider()));
 	}
+
+	/**
+	 * @test
+	 * @expectedException Exception
+	 */
+	public function ExecutesPreScript()
+	{
+		$this->profile->executePreScript();
+		$this->assertAttributeContains('testvalue', 'client', $this->profile, "The profile has a prescript that sets a testvalue in the Client object");
+	}
 }

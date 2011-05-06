@@ -29,6 +29,9 @@ class ScanCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$output->writeLn('Patience...');
+
+		$starttime = time();
 		$client = new Client;
 		$indent = '   ';
 		$leaf = '|_ ';
@@ -36,6 +39,8 @@ class ScanCommand extends Command
 
 		$profile = new Profile($client);
 		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
+
+		$profile->executePreScript();
 
 		foreach($profile->spider() as $page)
 		{
@@ -57,6 +62,8 @@ class ScanCommand extends Command
 			}
 			$output->writeLn('');
 		}
+
+		$output->writeLn(sprintf('Duration: %s seconds', time() - $starttime));
 
 		if($violations) {
 			$output->writeln("<error>$violations violations found.</error>");

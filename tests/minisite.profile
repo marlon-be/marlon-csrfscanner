@@ -7,3 +7,7 @@ $this->addRules(array(
 	new Scanner\Rule\HasTokenField,
 	new Scanner\Rule\ModifyingTokenCauses403,
 ));
+
+$this->setPreScript(function($client){
+	$client->testvalue = 123;
+});

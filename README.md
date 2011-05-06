@@ -62,4 +62,5 @@ http://localhost:8888/csrfscan-minisite/nestedpage.php
 
 Todo
 ----
-Sometimes the same form is repeated on different pages. Form equality could be a combination of action url, method, and fields. 
+- Sometimes the same form is repeated on different pages. Form equality could be a combination of action url, method, and fields. 
+- It should be possible to put links (or regexes?) in a blacklist, eg to avoid clicking a 'logout' link
