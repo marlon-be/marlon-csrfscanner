@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		<li><a href="tokennotcheckedform.php">Token not checked</a></li>
 		<li><a href="nestedpage.php">Nested page</a></li>
 		<li><a href="nestedpage.php#foo">Fragments (the part behind the #) should be ignored</a></li>
-		<li><a href="nestedpage.php#bar">Fragments (the part behind the #) should be ignored</a></li>
+		<li><a href="http://thissitedoesntexist.com/">External links are ignored</a></li>
 	</ul>
 
 	<form name="bogusform" method="POST">

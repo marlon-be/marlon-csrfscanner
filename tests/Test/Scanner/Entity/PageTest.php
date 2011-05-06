@@ -31,4 +31,20 @@ class PageTest extends ProfileTestCase
 		$this->assertInstanceOf('Scanner\Collection\FormsCollection', $foundforms);
 		$this->assertEquals(2, count($foundforms));
 	}
+
+	/** @test */
+	public function FragmentIsDropped()
+	{
+		$page = new Page('http://example.com/foobar#test');
+		$this->assertEquals('http://example.com/foobar', $page->getUri());
+
+	}
+
+	/** @test */
+	public function getDomain()
+	{
+		$page = new Page('http://example.com/foobar#test');
+		$this->assertEquals('example.com', $page->getDomain());
+
+	}
 }

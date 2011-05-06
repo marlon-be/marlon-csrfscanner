@@ -3,6 +3,7 @@ namespace Scanner\Entity;
 use Scanner\Tools\Spider;
 use Scanner\Rule\Rule;
 use Scanner\Collection\RulesCollection;
+use Scanner\Collection\DomainsCollection;
 use Scanner\Collection\PagesCollection;
 use Goutte\Client;
 
@@ -21,11 +22,15 @@ class Profile
 	/** @var Client */
 	private $client;
 
+	/** @var DomainsCollection */
+	private $domainWhitelist;
+
 	public function __construct(Client $client)
 	{
 		$this->client = $client;
 		$this->rules = new RulesCollection;
 		$this->startpages = new PagesCollection;
+		$this->domainWhitelist = new DomainsCollection;
 	}
 
 	public function loadFile($filename)
@@ -45,6 +50,7 @@ class Profile
 		foreach($uris as $uri)
 		{
 			$page = new Page($uri);
+			$this->domainWhitelist->add($page->getDomain());
 			$page->setClient($this->client);
 			$this->startpages->add($page);
 		}
@@ -53,8 +59,24 @@ class Profile
 	/** @return PagesCollection All spidered pages */
 	public function spider()
 	{
-		$spider = new Spider;
-		return $spider->spider($this->startpages);
+		$todo = clone $this->startpages;
+		$done = new PagesCollection;
+		while(count($todo))
+		{
+			$current = $todo->pop();
+			if(!$done->contains($current))
+			{
+				foreach($current->findLinkedPages() as $found)
+				{
+					if(!$done->contains($found) && $this->domainWhitelist->contains($found->getDomain())) {
+						$todo->add($found);
+					}
+				}
+			}
+			$done->add($current);
+		}
+
+		return $done;
 	}
 
 	public function getRules()

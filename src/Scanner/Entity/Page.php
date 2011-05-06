@@ -98,6 +98,11 @@ class Page
 		return $this->uri;
 	}
 
+	public function getDomain()
+	{
+		return parse_url($this->uri, PHP_URL_HOST);
+	}
+
 	/**
 	 * Removes the part after the #
 	 */

@@ -23,6 +23,7 @@ At the moment, the scanner assumes that to be protected:
 - every form must have a hidden token field,
 - changing or removing that token field should cause a 403 Forbidden response.
 Different rules can be added however. 
+Spidering is restricted to the domains of the startpages (as defined in the profile)
 
 What it doesn't do
 ------------------
