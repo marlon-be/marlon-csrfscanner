@@ -59,3 +59,7 @@ http://localhost:8888/csrfscan-minisite/goodform.php
 
 http://localhost:8888/csrfscan-minisite/nestedpage.php
 ```
+
+Todo
+----
+Sometimes the same form is repeated on different pages. Form equality could be a combination of action url, method, and fields. 

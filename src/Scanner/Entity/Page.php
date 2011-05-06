@@ -82,7 +82,6 @@ class Page
 	/** @return FormsCollection */
 	public function getForms()
 	{
-
 		$forms = new FormsCollection;
 		foreach($this->getCrawler()->filterXPath('//form') as $node)
 		{
