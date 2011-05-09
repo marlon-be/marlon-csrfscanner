@@ -36,7 +36,20 @@ Usage
 -----
 * git clone url/to/csrf-scanner csrf-scanner
 * Create a file called yoursite.profile, see tests/minisite.profile.dist for an example
-* execute bin/csrfscan scan path/to/profile
+* bin/csrfscan scan path/to/profile
+
+Login script
+------------
+Usually you'll want to login to a site before running the scan. You can do this by adding a prescript in the profile:
+
+```
+$this->setPreScript(function($client) {
+	$crawler = $client->request('get', 'http://site/loginpage');
+	$form = $crawler->selectButton('btn-login')->form();
+	$form->setValues(array('username' => 'myname', 'password' => 'test'));
+	$client->submit($form);
+});
+```
 
 Output
 ------
