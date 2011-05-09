@@ -28,14 +28,15 @@ class Profile
 	/** @var Closure */
 	private $prescript;
 
-	private $blacklist = array();
-	/** @var array */
+	/** @var PagesCollection */
+	private $pageBlacklist;
 
 	public function __construct(Client $client)
 	{
 		$this->client = $client;
 		$this->rules = new RulesCollection;
 		$this->startpages = new PagesCollection;
+		$this->pageBlacklist = new PagesCollection;
 		$this->domainWhitelist = new DomainsCollection;
 	}
 
@@ -79,8 +80,8 @@ class Profile
 
 	public function blacklist(array $uris = array())
 	{
-		foreach($uris as $uri) {
-			$this->blacklist[$uri] = $uri;
+		foreach($uris as $uri)	{
+			$this->pageBlacklist->add(new Page($uri));
 		}
 	}
 
@@ -96,7 +97,11 @@ class Profile
 			{
 				foreach($current->findLinkedPages() as $found)
 				{
-					if(!$done->contains($found) && $this->domainWhitelist->contains($found->getDomain())) {
+					if(
+						!$done->contains($found)
+						&& !$this->pageBlacklist->contains($found)
+						&& $this->domainWhitelist->contains($found->getDomain())
+					) {
 						$todo->add($found);
 					}
 				}

@@ -16,7 +16,7 @@ class PageTest extends ProfileTestCase
 		$linkedpages = $indexpage->findLinkedPages();
 
 		$this->assertInstanceOf('Scanner\Collection\PagesCollection', $linkedpages);
-		$this->assertEquals(3, count($linkedpages), 'Reading minisite/index.php should find 3 links');
+		$this->assertEquals(4, count($linkedpages), 'Reading minisite/index.php should find 4 links');
 	}
 
 	/** @test */
