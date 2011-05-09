@@ -28,6 +28,9 @@ class Profile
 	/** @var Closure */
 	private $prescript;
 
+	private $blacklist = array();
+	/** @var array */
+
 	public function __construct(Client $client)
 	{
 		$this->client = $client;
@@ -71,6 +74,13 @@ class Profile
 			$this->domainWhitelist->add($page->getDomain());
 			$page->setClient($this->client);
 			$this->startpages->add($page);
+		}
+	}
+
+	public function blacklist(array $uris = array())
+	{
+		foreach($uris as $uri) {
+			$this->blacklist[$uri] = $uri;
 		}
 	}
 

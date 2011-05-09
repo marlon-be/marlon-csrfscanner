@@ -5,6 +5,7 @@ use Symfony\Component\DomCrawler\Form;
 
 /**
  * Test if modifying the token results in a 403 response
+ * @codeCoverageIgnore (Covered by Acceptance\MinisiteTest)
  */
 class ModifyingTokenCauses403 extends AbstractRule
 {

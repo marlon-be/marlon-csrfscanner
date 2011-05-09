@@ -5,6 +5,7 @@ use Symfony\Component\DomCrawler\Form;
 
 /**
  * Test if a form has a hidden token field
+ * @codeCoverageIgnore (Covered by Acceptance\MinisiteTest)
  */
 class HasTokenField extends AbstractRule
 {

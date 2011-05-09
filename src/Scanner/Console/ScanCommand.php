@@ -9,6 +9,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @codeCoverageIgnore (Covered by Acceptance\MinisiteTest)
+ */
 class ScanCommand extends Command
 {
 	const EXIT_SUCCESS = 0;
@@ -27,6 +30,15 @@ class ScanCommand extends Command
 			->setHelp("Scan a website for CSRF vulnerabilities");
 	}
 
+	private function resolvePath($path)
+	{
+		if(in_array(substr($path, 0, 1), array('/', '\\'))) {
+			return $path;
+		} else {
+			return getcwd().DIRECTORY_SEPARATOR.$path;
+		}
+	}
+
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$output->writeLn('Patience...');
@@ -38,7 +50,7 @@ class ScanCommand extends Command
 		$violations = 0;
 
 		$profile = new Profile($client);
-		$profile->loadFile(getcwd().DIRECTORY_SEPARATOR.$input->getArgument('profile'));
+		$profile->loadFile($this->resolvePath($input->getArgument('profile')));
 
 		$profile->executePreScript();
 
