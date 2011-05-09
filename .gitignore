@@ -1,5 +1,5 @@
 .settings
 .buildpath
 .project
-tests/config.php
+tests/minisite.profile
 build/

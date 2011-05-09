@@ -20,7 +20,6 @@ class MinisiteTest extends \PHPUnit_Framework_TestCase
 		$return = null;
 		exec($command, $output, $return);
 		$output = implode(PHP_EOL, $output);
-		$this->assertEquals(1, $return, "The command's exit code should be 1 (ScanCommand::EXIT_ERROR)");
 
 $expected =  <<<END
 Patience...
@@ -48,5 +47,6 @@ Duration: 0 seconds
 END;
 
 		$this->assertEquals($expected, $output);
+		$this->assertEquals(1, $return, "The command's exit code should be 1 (ScanCommand::EXIT_ERROR)");
 	}
 }

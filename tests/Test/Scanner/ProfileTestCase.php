@@ -18,18 +18,15 @@ abstract class ProfileTestCase extends TestCase
 
 	public function setUp()
 	{
-		// Load config.php, fall back to config.php.dist
-		$configfile = __DIR__.'/../../config.php';
-		if(file_exists($configfile)) {
-			require_once $configfile;
-		} else {
+		$profilefile =  __DIR__.'/../../minisite.profile';
+		if(!file_exists($profilefile)) {
 			// @codeCoverageIgnoreStart
-			$this->fail('This test requires a connection to the minisite. Publish /tests/minisite/ somewhere, copy /tests/config.php.dist to /tests/config.php and adjust it.');
+			$this->fail('This test requires a connection to the minisite. Publish /tests/minisite/ somewhere, copy /tests/minisite.profile.dist to /tests/minisite.profile and adjust it.');
 			// @codeCoverageIgnoreEnd
 		}
 
 		$this->profile = new Profile(new Client);
-		$this->profile->loadFile( __DIR__.'/../../minisite.profile');
+		$this->profile->loadFile($profilefile);
 
 		$this->client = new Client;
 	}
