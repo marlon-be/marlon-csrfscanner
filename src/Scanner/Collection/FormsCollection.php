@@ -22,8 +22,7 @@ class FormsCollection extends ArrayCollection
     public function add($value)
     {
     	// make sure forms are unique
-    	$hash = $this->getHash($value);
-        return $this->set($hash, $value);
+        return $this->set($value->getHash(), $value);
     }
 
     public function set($key, $value)
@@ -32,16 +31,5 @@ class FormsCollection extends ArrayCollection
 		return parent::set($key, $value);
     }
 
-	private function getHash(Form $form)
-	{
-		$fields = array();
-    	foreach($form->all() as $field) {
-    		$fields[] = array(get_class($field), $field->getName());
-    	}
 
-    	$meta = array($fields, $form->getMethod(), $form->getUri());
-    	$hash = md5(serialize($meta));
-
-    	return $hash;
-	}
 }
