@@ -3,8 +3,8 @@ namespace Scanner\Entity;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Link;
-use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\DomCrawler\Crawler;
+use Scanner\Entity\Form;
 use Scanner\Collection\PagesCollection;
 use Scanner\Collection\FormsCollection;
 
@@ -55,28 +55,30 @@ class Page
 	}
 
 	/**
-	 * Turn a DOMElement into a Symfony\Component\DomCrawler\Form
+	 * Turn a DOMElement into a Scanner\Entity\Form
+	 * @return Form
 	 */
 	private function elementToForm(\DOMElement $node)
 	{
-		$formname = sprintf('//form[@name="%s"]', $node->getAttribute('name'));
 		// Find the submit field, or fallback to other submittables
-		$crawler = $this->getCrawler()->filterXPath(sprintf(
+		$formname = sprintf('//form[@name="%s"]', $node->getAttribute('name'));
+	 	$query = sprintf(
 			'%s//input[@type="submit"] | %s//button | %s//input[@type="button"] | %s//input[@type="image"]',
-			$formname, $formname, $formname, $formname)
+			$formname, $formname, $formname, $formname
 		);
-		if(count($crawler)) {
-			$form = $crawler->form();
-		}
-		else
+
+		$xpath = new \DOMXPath($node->ownerDocument);
+		$button = $xpath->query($query)->item(0);
+
+		if(!$button)
 		{
 			// no submit buttons where found, add one ourselves
-			$submit  = $node->ownerDocument->createElement('input');
-			$submit->setAttribute('type', 'submit');
-			$node->appendChild($submit);
-			$form = new Form($submit, $this->getUri(), 'post');
+			$button  = $node->ownerDocument->createElement('input');
+			$button->setAttribute('type', 'submit');
+			$node->appendChild($button);
 		}
-		return ($form);
+		$form = new Form($button, $this->getUri(), 'post');
+		return $form;
 	}
 
 	/** @return FormsCollection */

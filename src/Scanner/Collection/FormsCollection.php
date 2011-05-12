@@ -1,7 +1,7 @@
 <?php
 namespace Scanner\Collection;
 
-use Symfony\Component\DomCrawler\Form;
+use Scanner\Entity\Form;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class FormsCollection extends ArrayCollection
