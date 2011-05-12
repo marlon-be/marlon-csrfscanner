@@ -51,7 +51,6 @@ class ScanCommand extends Command
 
 		$profile = new Profile($client);
 		$profile->loadFile($this->resolvePath($input->getArgument('profile')));
-
 		$profile->executePreScript();
 
 		foreach($profile->spider() as $page)
@@ -59,11 +58,9 @@ class ScanCommand extends Command
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
-				$name = $form->getFormNode()->getAttribute('name');
-				$output->writeLn($indent.$leaf.sprintf('<form name="%s">', $name));
+				$output->writeLn($indent.$leaf.$form->getHtml());
 				foreach($profile->getRules() as $rule)
 				{
-					$rule->setClient($client);
 					if(!$rule->isValid($form))
 					{
 						$output->writeLn($indent.$indent.$leaf."<error>".$rule->getMessage()."</error>");

@@ -24,4 +24,14 @@ class Form extends BaseForm
 
     	return $hash;
 	}
+
+	public function getName()
+	{
+		return $this->getFormNode()->getAttribute('name');
+	}
+
+	public function getHtml()
+	{
+		return sprintf('<form name="%s" action="%s">', $this->getName(), $this->getUri());
+	}
 }

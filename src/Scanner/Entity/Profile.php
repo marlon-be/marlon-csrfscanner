@@ -62,7 +62,9 @@ class Profile
 
 	public function addRules(array $rules)
 	{
-		foreach($rules as $rule) {
+		foreach($rules as $rule)
+		{
+			$rule->setClient($this->client);
 			$this->rules->add($rule);
 		}
 	}
