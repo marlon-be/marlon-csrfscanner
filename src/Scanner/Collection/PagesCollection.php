@@ -21,7 +21,6 @@ class PagesCollection extends ArrayCollection
 
     public function add($value)
     {
-    	$this->check($value);
         return $this->set($value->getUri(), $value);
     }
 
