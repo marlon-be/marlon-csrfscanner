@@ -1,6 +1,8 @@
 <?php
 namespace Scanner\Console;
 
+use Scanner\Collection\FormsCollection;
+
 use Goutte\Client;
 use Scanner\Entity\Profile;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +18,9 @@ class ScanCommand extends Command
 {
 	const EXIT_SUCCESS = 0;
 	const EXIT_FAIL = 1;
+
+	const LEAF = '|_ ';
+	const INDENT = '   ';
 
 	protected function configure()
 	{
@@ -45,9 +50,8 @@ class ScanCommand extends Command
 
 		$starttime = time();
 		$client = new Client;
-		$indent = '   ';
-		$leaf = '|_ ';
 		$violations = 0;
+		$testedForms = new FormsCollection;
 
 		$profile = new Profile($client);
 		$profile->loadFile($this->resolvePath($input->getArgument('profile')));
@@ -58,16 +62,21 @@ class ScanCommand extends Command
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
 			{
-				$output->writeLn($indent.$leaf.$form->getHtml());
+				$output->writeLn(self::INDENT.self::LEAF.$form->getHtml());
+				if($testedForms->contains($form)) {
+					$output->writeLn(self::INDENT.self::INDENT.self::LEAF.'Already tested');
+					continue;
+				}
 				foreach($profile->getRules() as $rule)
 				{
 					if(!$rule->isValid($form))
 					{
-						$output->writeLn($indent.$indent.$leaf."<error>".$rule->getMessage()."</error>");
+						$output->writeLn(self::INDENT.self::INDENT.self::LEAF."<error>".$rule->getMessage()."</error>");
 						++$violations;
 					}
 
 				}
+				$testedForms->add($form);
 			}
 			$output->writeLn('');
 		}

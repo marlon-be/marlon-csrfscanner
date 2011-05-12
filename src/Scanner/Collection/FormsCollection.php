@@ -31,5 +31,8 @@ class FormsCollection extends ArrayCollection
 		return parent::set($key, $value);
     }
 
-
+	public function contains($element)
+    {
+        return parent::contains($element) || parent::containsKey($element->getHash());
+    }
 }

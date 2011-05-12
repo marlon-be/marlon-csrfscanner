@@ -25,6 +25,9 @@ At the moment, the scanner assumes that to be protected:
 Different rules can be added however. 
 Spidering is restricted to the domains of the startpages (as defined in the profile)
 
+Sometimes the same form is repeated on different pages. In that case it is only tested once.
+
+
 What it doesn't do
 ------------------
 - If on your site, GET requests can cause damage, this tool will not detect that. Just never allow GET for non-idempotent requests.
@@ -72,8 +75,3 @@ http://localhost:8888/csrfscan-minisite/goodform.php
 
 http://localhost:8888/csrfscan-minisite/nestedpage.php
 ```
-
-Todo
-----
-- Sometimes the same form is repeated on different pages. Form equality could be a combination of action url, method, and fields. 
-- It should be possible to put links (or regexes?) in a blacklist, eg to avoid clicking a 'logout' link
