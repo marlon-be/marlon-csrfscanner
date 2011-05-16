@@ -43,6 +43,7 @@ http://localhost:8888/csrfscan-minisite/goodform.php
 http://localhost:8888/csrfscan-minisite/nestedpage.php
 
 Duration: 0 seconds
+Found 4 unique forms on 5 pages
 5 violations found.
 END;
 

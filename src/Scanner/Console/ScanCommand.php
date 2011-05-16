@@ -56,8 +56,9 @@ class ScanCommand extends Command
 		$profile = new Profile($client);
 		$profile->loadFile($this->resolvePath($input->getArgument('profile')));
 		$profile->executePreScript();
+		$pages = $profile->spider();
 
-		foreach($profile->spider() as $page)
+		foreach($pages as $page)
 		{
 			$output->writeLn('<info>'.$page->getUri().'</info>');
 			foreach($page->getForms() as $form)
@@ -82,6 +83,7 @@ class ScanCommand extends Command
 		}
 
 		$output->writeLn(sprintf('Duration: %s seconds', time() - $starttime));
+		$output->writeLn(sprintf('Found %s unique forms on %s pages', count($testedForms), count($pages)));
 
 		if($violations) {
 			$output->writeln("<error>$violations violations found.</error>");
