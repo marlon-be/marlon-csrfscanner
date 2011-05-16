@@ -26,17 +26,17 @@ Patience...
 http://localhost:8888/csrfscan-minisite/
 
 http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php
-   |_ <form name="tokennotcheckedform">
+   |_ <form name="tokennotcheckedform" action="http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php">
       |_ 403 response expected, but got a 200
 
 http://localhost:8888/csrfscan-minisite/notokenform.php
-   |_ <form name="notokenform">
+   |_ <form name="notokenform" action="http://localhost:8888/csrfscan-minisite/notokenform.php">
       |_ No 'token' input field found
       |_ No 'token' input field found
 
 http://localhost:8888/csrfscan-minisite/goodform.php
-   |_ <form name="goodform">
-   |_ <form name="bogusform">
+   |_ <form name="goodform" action="http://localhost:8888/csrfscan-minisite/goodform.php">
+   |_ <form name="bogusform" action="http://localhost:8888/csrfscan-minisite/goodform.php">
       |_ No 'token' input field found
       |_ No 'token' input field found
 

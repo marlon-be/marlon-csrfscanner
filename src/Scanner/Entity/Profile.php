@@ -1,5 +1,7 @@
 <?php
 namespace Scanner\Entity;
+
+use Scanner\Specification\NotAMailtoLink;
 use Scanner\Tools\Spider;
 use Scanner\Rule\Rule;
 use Scanner\Collection\RulesCollection;
@@ -92,6 +94,8 @@ class Profile
 	{
 		$todo = clone $this->startpages;
 		$done = new PagesCollection;
+		$notAMailtoLink = new NotAMailtoLink;
+
 		while(count($todo))
 		{
 			$current = $todo->pop();
@@ -103,6 +107,7 @@ class Profile
 						!$done->contains($found)
 						&& !$this->pageBlacklist->contains($found)
 						&& $this->domainWhitelist->contains($found->getDomain())
+						&& $notAMailtoLink->isSatisfiedBy($found)
 					) {
 						$todo->add($found);
 					}
