@@ -1,7 +1,8 @@
 <?php
 namespace Scanner\Entity;
 
-use Scanner\Specification\NotAMailtoLink;
+use Scanner\Specification\Not;
+use Scanner\Specification\IsAMailtoLink;
 use Scanner\Tools\Spider;
 use Scanner\Rule\Rule;
 use Scanner\Collection\RulesCollection;
@@ -94,7 +95,7 @@ class Profile
 	{
 		$todo = clone $this->startpages;
 		$done = new PagesCollection;
-		$notAMailtoLink = new NotAMailtoLink;
+		$notAMailtoLink = new Not(new IsAMailtoLink);
 
 		while(count($todo))
 		{
