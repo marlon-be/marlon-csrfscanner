@@ -3,7 +3,7 @@ namespace Scanner\Specification;
 
 use Scanner\Entity\Page;
 
-class IsAMailtoLink extends AbstractSpecification implements Specification
+class IsAMailtoLinkSpecification extends AbstractSpecification implements Specification
 {
 	public function isSatisfiedBy($page)
 	{

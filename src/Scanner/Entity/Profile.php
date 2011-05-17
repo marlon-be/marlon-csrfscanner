@@ -1,8 +1,8 @@
 <?php
 namespace Scanner\Entity;
 
-use Scanner\Specification\NotSpecification;
-use Scanner\Specification\IsAMailtoLink;
+use Scanner\Specification\IsAMailtoLinkSpecification;
+
 use Scanner\Tools\Spider;
 use Scanner\Rule\Rule;
 use Scanner\Collection\RulesCollection;
@@ -95,7 +95,7 @@ class Profile
 	{
 		$todo = clone $this->startpages;
 		$done = new PagesCollection;
-		$isAMailtoLink = new IsAMailtoLink;
+		$isAMailtoLink = new IsAMailtoLinkSpecification;
 
 		while(count($todo))
 		{
