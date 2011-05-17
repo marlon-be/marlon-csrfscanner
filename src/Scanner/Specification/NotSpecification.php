@@ -1,7 +1,7 @@
 <?php
 namespace Scanner\Specification;
 
-class Not implements Specification
+class NotSpecification extends AbstractSpecification implements Specification
 {
 	/** @var Specification */
 	private $specification;
