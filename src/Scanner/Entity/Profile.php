@@ -1,6 +1,10 @@
 <?php
 namespace Scanner\Entity;
 
+use Scanner\Specification\WhitelistedDomainSpecification;
+
+use Scanner\Specification\BlacklistedPageSpecification;
+
 use Scanner\Specification\IsAMailtoLinkSpecification;
 
 use Scanner\Tools\Spider;
@@ -90,12 +94,25 @@ class Profile
 		}
 	}
 
+	/** @var Specification */
+	public function getPageSpecification()
+	{
+		$isAMailtoLinkSpec = new IsAMailtoLinkSpecification;
+		$blacklistedPageSpec = new BlacklistedPageSpecification($this->pageBlacklist);
+		$whitelistedDomainSpec = new WhitelistedDomainSpecification($this->domainWhitelist);
+
+		return
+			$isAMailtoLinkSpec->not_()
+			->and_($blacklistedPageSpec->not_())
+			->and_($whitelistedDomainSpec);
+	}
+
 	/** @return PagesCollection All spidered pages */
 	public function spider()
 	{
 		$todo = clone $this->startpages;
 		$done = new PagesCollection;
-		$isAMailtoLink = new IsAMailtoLinkSpecification;
+		$spec = $this->getPageSpecification();
 
 		while(count($todo))
 		{
@@ -104,12 +121,7 @@ class Profile
 			{
 				foreach($current->findLinkedPages() as $found)
 				{
-					if(
-						!$done->contains($found)
-						&& !$this->pageBlacklist->contains($found)
-						&& $this->domainWhitelist->contains($found->getDomain())
-						&& $isAMailtoLink->not_()->isSatisfiedBy($found)
-					) {
+					if(!$done->contains($found) && $spec->isSatisfiedBy($found)) {
 						$todo->add($found);
 					}
 				}
