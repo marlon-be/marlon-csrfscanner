@@ -57,21 +57,21 @@ $this->setPreScript(function($client) {
 Output
 ------
 The output looks something like this:
-```
-http://localhost:8888/csrfscan-minisite/
 
-http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php
-   |_ tokennotcheckedform
-      |_ 403 response expected, but got a 200
+    http://localhost:8888/csrfscan-minisite/
+    
+    http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php
+       |_ tokennotcheckedform
+          |_ 403 response expected, but got a 200
+    
+    http://localhost:8888/csrfscan-minisite/notokenform.php
+       |_ notokenform
+          |_ No 'token' input field found
+    
+    http://localhost:8888/csrfscan-minisite/goodform.php
+       |_ goodform
+       |_ bogusform
+          |_ No 'token' input field found
+    
+    http://localhost:8888/csrfscan-minisite/nestedpage.php
 
-http://localhost:8888/csrfscan-minisite/notokenform.php
-   |_ notokenform
-      |_ No 'token' input field found
-
-http://localhost:8888/csrfscan-minisite/goodform.php
-   |_ goodform
-   |_ bogusform
-      |_ No 'token' input field found
-
-http://localhost:8888/csrfscan-minisite/nestedpage.php
-```
