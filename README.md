@@ -45,7 +45,8 @@ Login script
 ------------
 Usually you'll want to login to a site before running the scan. You can do this by adding a prescript in the profile:
 
-```
+```php
+<?php
 $this->setPreScript(function($client) {
 	$crawler = $client->request('get', 'http://site/loginpage');
 	$form = $crawler->selectButton('btn-login')->form();
