@@ -5,8 +5,6 @@ use Scanner\Entity\Page;
 use Scanner\Collection\PagesCollection;
 use Test\Scanner\TestCase;
 
-require_once __DIR__.'/../TestCase.php';
-
 class PagesCollectionTest extends TestCase
 {
 	/** @test */

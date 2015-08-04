@@ -5,8 +5,6 @@ use Scanner\Collection\RulesCollection;
 
 use Test\Scanner\TestCase;
 
-require_once __DIR__.'/../TestCase.php';
-
 class RulesCollectionTest extends TestCase
 {
 	/**

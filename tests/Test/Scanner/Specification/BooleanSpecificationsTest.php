@@ -9,8 +9,6 @@ use Scanner\Specification\Specification;
 
 use Test\Scanner\TestCase;
 
-require_once __DIR__.'/../TestCase.php';
-
 class BooleanSpecificationsTest extends TestCase
 {
 	/** @var MockSpecification */

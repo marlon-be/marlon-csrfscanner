@@ -5,8 +5,6 @@ use Scanner\Entity\Page;
 use Scanner\Specification\IsAMailtoLinkSpecification;
 use Test\Scanner\TestCase;
 
-require_once __DIR__.'/../TestCase.php';
-
 class IsAMailtoLinkSpecificationTest extends TestCase
 {
 	/** @test */

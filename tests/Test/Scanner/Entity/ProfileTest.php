@@ -4,8 +4,6 @@ namespace Test\Scanner\Entity;
 use Scanner\Entity\Profile;
 use Test\Scanner\ProfileTestCase;
 
-require_once __DIR__.'/../ProfileTestCase.php';
-
 class ProfileTest extends ProfileTestCase
 {
 	/** @test */
@@ -26,11 +24,11 @@ class ProfileTest extends ProfileTestCase
 
 	/**
 	 * @test
-	 * @expectedException Exception
 	 */
 	public function ExecutesPreScript()
 	{
 		$this->profile->executePreScript();
-		$this->assertAttributeContains('testvalue', 'client', $this->profile, "The profile has a prescript that sets a testvalue in the Client object");
+		$this->assertObjectHasAttribute('testvalue', $this->client, "The profile has a prescript that sets a testvalue in the Client object");
+		$this->assertEquals(123, $this->client->testvalue);
 	}
 }

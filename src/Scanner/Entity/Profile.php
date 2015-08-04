@@ -62,8 +62,8 @@ class Profile
 
 	public function executePreScript()
 	{
-		if($script = $this->prescript) {
-			$script($this->client);
+		if(isset($this->prescript)) {
+			call_user_func($this->prescript, $this->client);
 		}
 	}
 

@@ -4,8 +4,6 @@ namespace Test\Scanner\Entity;
 use Scanner\Entity\Page;
 use Test\Scanner\ProfileTestCase;
 
-require_once __DIR__.'/../ProfileTestCase.php';
-
 class PageTest extends ProfileTestCase
 {
 	/** @test */

@@ -59,20 +59,28 @@ Output
 ------
 The output looks something like this:
 
-    http://localhost:8888/csrfscan-minisite/
+    http://localhost:8888/
     
-    http://localhost:8888/csrfscan-minisite/tokennotcheckedform.php
+    http://localhost:8888/tokennotcheckedform.php
        |_ tokennotcheckedform
           |_ 403 response expected, but got a 200
     
-    http://localhost:8888/csrfscan-minisite/notokenform.php
+    http://localhost:8888/notokenform.php
        |_ notokenform
           |_ No 'token' input field found
     
-    http://localhost:8888/csrfscan-minisite/goodform.php
+    http://localhost:8888/goodform.php
        |_ goodform
        |_ bogusform
           |_ No 'token' input field found
     
-    http://localhost:8888/csrfscan-minisite/nestedpage.php
+    http://localhost:8888/nestedpage.php
+
+Running Tests
+-------------
+
+Start a webserver:
+
+``` bash
+php -S localhost:8888 -t tests/minisite
 

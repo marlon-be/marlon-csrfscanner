@@ -1,14 +1,4 @@
-.settings
-.buildpath
-.project
+phpunit.xml
 tests/minisite.profile
-build/
-
-
-4411 output.1
-4411.profile
-TODO
-adminm4.profile
-documentation.profile
-mamp.profile
-mathias.profile
+/vendor/
+composer.lock

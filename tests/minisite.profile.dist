@@ -1,10 +1,10 @@
 <?php
 $this->addStartpages(array(
-	'http://localhost:8888/csrfscan-minisite/',
+	'http://localhost:8888/',
 ));
 
 $this->blacklist(array(
-	'http://localhost:8888/csrfscan-minisite/blacklistedpage.php',
+	'http://localhost:8888/blacklistedpage.php',
 ));
 
 $this->setPreScript(function($client){

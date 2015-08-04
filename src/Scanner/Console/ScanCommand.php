@@ -1,12 +1,12 @@
 <?php
 namespace Scanner\Console;
 
+use GuzzleHttp\Exception\ConnectException;
 use Scanner\Collection\FormsCollection;
 
 use Goutte\Client;
 use Scanner\Entity\Profile;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -46,51 +46,51 @@ class ScanCommand extends Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$output->writeLn('Patience...');
+		$output->writeln('Patience...');
 
-		$starttime = time();
-		$client = new Client;
-		$violations = 0;
-		$testedForms = new FormsCollection;
+		try {
+			$starttime = time();
+			$client = new Client;
+			$violations = 0;
+			$testedForms = new FormsCollection;
 
-		$profile = new Profile($client);
-		$profile->loadFile($this->resolvePath($input->getArgument('profile')));
-		$profile->executePreScript();
-		$pages = $profile->spider();
+			$profile = new Profile($client);
+			$profile->loadFile($this->resolvePath($input->getArgument('profile')));
+			$profile->executePreScript();
+			$pages = $profile->spider();
 
-		foreach($pages as $page)
-		{
-			$output->writeLn('<info>'.$page->getUri().'</info>');
-			foreach($page->getForms() as $form)
-			{
-				$output->writeLn(self::INDENT.self::LEAF.$form->getHtml());
-				if($testedForms->contains($form)) {
-					$output->writeLn(self::INDENT.self::INDENT.self::LEAF.'Already tested');
-					continue;
-				}
-				foreach($profile->getRules() as $rule)
-				{
-					if(!$rule->isValid($form))
-					{
-						$output->writeLn(self::INDENT.self::INDENT.self::LEAF."<error>".$rule->getMessage()."</error>");
-						++$violations;
+			foreach ($pages as $page) {
+				$output->writeLn('<info>' . $page->getUri() . '</info>');
+				foreach ($page->getForms() as $form) {
+					$output->writeln(self::INDENT . self::LEAF . $form->getHtml());
+					if ($testedForms->contains($form)) {
+						$output->writeln(self::INDENT . self::INDENT . self::LEAF . 'Already tested');
+						continue;
 					}
+					foreach ($profile->getRules() as $rule) {
+						if (!$rule->isValid($form)) {
+							$output->writeln(self::INDENT . self::INDENT . self::LEAF . "<error>" . $rule->getMessage() . "</error>");
+							++$violations;
+						}
 
+					}
+					$testedForms->add($form);
 				}
-				$testedForms->add($form);
+				$output->writeln('');
 			}
-			$output->writeLn('');
-		}
 
-		$output->writeLn(sprintf('Duration: %s seconds', time() - $starttime));
-		$output->writeLn(sprintf('Found %s unique forms on %s pages', count($testedForms), count($pages)));
+			$output->writeln(sprintf('Duration: %s seconds', time() - $starttime));
+			$output->writeln(sprintf('Found %s unique forms on %s pages', count($testedForms), count($pages)));
 
-		if($violations) {
-			$output->writeln("<error>$violations violations found.</error>");
-			return self::EXIT_FAIL;
-		} else {
-			$output->writeln('<info>Done.</info>');
-			return self::EXIT_SUCCESS;
+			if ($violations) {
+				$output->writeln("<error>$violations violations found.</error>");
+				return self::EXIT_FAIL;
+			} else {
+				$output->writeln('<info>Done.</info>');
+				return self::EXIT_SUCCESS;
+			}
+		} catch (ConnectException $e) {
+			$output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 		}
 	}
 }
